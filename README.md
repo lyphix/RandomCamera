@@ -19,7 +19,7 @@ used Aforge.
 
 this is programmed for my friend, and will use in the Art exhibition.
 
-press “开始” will open the random camera and start countdown.
+press “开始” will open the camera and start countdown.
 
 player need to find the camera in time and press space to switch to the next camrea.
 
