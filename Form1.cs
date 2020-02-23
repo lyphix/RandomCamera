@@ -26,7 +26,7 @@ namespace Camera
         int CameraNum = 0;
         int[] CameraArray = new int[10];
         Random rd = new Random();
-
+        
 
         private void buttonrandom_Click(object sender, EventArgs e)//按下开始按钮
         {
@@ -76,16 +76,21 @@ namespace Camera
             {
                 cmbResolution.Items.Add($"{capabilty.FrameSize.Width} x {capabilty.FrameSize.Height}");
                 int Res2 = capabilty.FrameSize.Width * capabilty.FrameSize.Height;
-                if (Res2 > Res1)//计算摄像头支持的最大分辨率
+                if (Res2 > Res1‬)//计算摄像头支持的最大分辨率
                 {
-                    MaxResid = Resid;
+                    Res1 = Res2;
+                    if(Res2< 2073601)
+                    {
+                        MaxResid = Resid;
+                    }
                 }
-                Res1 = Res2;
+                
                 Resid++;
             }
+            
             cmbResolution.SelectedIndex = MaxResid;
-            string res = cmbResolution.SelectedItem.ToString();
-            string[] num = res.Split(new string[] { "x" }, StringSplitOptions.RemoveEmptyEntries);//检出分辨率数值
+            //string res = cmbResolution.SelectedItem.ToString();
+            //string[] num = res.Split(new string[] { "x" }, StringSplitOptions.RemoveEmptyEntries);//检出分辨率数值
             //vispShoot.Size = new System.Drawing.Size(Convert.ToInt32(num[0]), Convert.ToInt32(num[1]));//赋值给视频窗体
 
         }
@@ -129,13 +134,16 @@ namespace Camera
             }
             if(e.KeyChar == (char)Keys.Space)
             {
-                if (this.buttonrandom.Visible == false)
+                if (count > 15)
                 {
-                    NextCamera();
-                }
-                else
-                {
-                    MessageBox.Show("请先按开始", "");
+                    if (this.buttonrandom.Visible == false)
+                    {
+                        NextCamera();
+                    }
+                    else
+                    {
+                        MessageBox.Show("请先按开始", "");
+                    }
                 }
                 
             }
@@ -161,13 +169,14 @@ namespace Camera
             this.label1.Visible = false;
             this.cbFullScreen.Visible = false;
             this.tbTimer.Visible = false;
+            //this.cmbResolution.Visible = false;
 
 
 
-            CameraArray = Enumerable.Range(0,cmbCamera.Items.Count)
-                        .OrderBy(n => (rd.Next()))
-                        .ToArray<int>();
-            cmbCamera.SelectedIndex = CameraArray[CameraNum-1];
+            //CameraArray = Enumerable.Range(0,cmbCamera.Items.Count)
+            //            .OrderBy(n => (rd.Next()))
+            //            .ToArray<int>();
+            cmbCamera.SelectedIndex = CameraNum-1;
             reConnect();
             time = Convert.ToInt32(tbTimer.Text) * 10;
             progressBar1.Maximum = time;
@@ -179,7 +188,8 @@ namespace Camera
             CameraNum--;
             if (CameraNum != 0)
             {
-                cmbCamera.SelectedIndex = CameraArray[CameraNum-1];
+                //cmbCamera.SelectedIndex = CameraArray[CameraNum-1];
+                cmbCamera.SelectedIndex= CameraNum-1;
                 reConnect();
                 timer1.Stop();//停止计时
                 progressBar1.Value = 0;
@@ -201,6 +211,7 @@ namespace Camera
             DisConnect();
             this.buttonrandom.Visible = true;
             CameraNum = cmbCamera.Items.Count;
+            cmbCamera.SelectedIndex = 0;
         }
 
         private void ResetSetting()
@@ -209,6 +220,7 @@ namespace Camera
             this.label1.Visible = true;
             this.cbFullScreen.Visible = true;
             this.tbTimer.Visible = true;
+            //this.cmbResolution.Visible = true;
         }
 
     }

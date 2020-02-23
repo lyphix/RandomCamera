@@ -43,10 +43,11 @@
             // 
             // cmbResolution
             // 
+            this.cmbResolution.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cmbResolution.FormattingEnabled = true;
-            this.cmbResolution.Location = new System.Drawing.Point(12, 12);
+            this.cmbResolution.Location = new System.Drawing.Point(535, 323);
             this.cmbResolution.Name = "cmbResolution";
-            this.cmbResolution.Size = new System.Drawing.Size(121, 20);
+            this.cmbResolution.Size = new System.Drawing.Size(108, 20);
             this.cmbResolution.TabIndex = 1;
             // 
             // vispShoot
